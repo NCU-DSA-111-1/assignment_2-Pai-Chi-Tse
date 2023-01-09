@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1667003559 source:d:\datastructure\109501549_assignment_2\hw2\chess.c
+	"chess.h"
+
+1667002207 source:d:\datastructure\109501549_assignment_2\hw2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"chess.h"
+
+1666997588 d:\datastructure\109501549_assignment_2\hw2\chess.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+
+1673258403 source:d:\datastructure\109501549_assignment_2\chess\chess.c
+	"chess.h"
+	<windows.h>
+
+1673279444 d:\datastructure\109501549_assignment_2\chess\chess.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+
+1673281399 source:d:\datastructure\109501549_assignment_2\chess\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"chess.h"
+
+1673184020 source:d:\datastructure\109501549_assignment_2\chess\file.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
