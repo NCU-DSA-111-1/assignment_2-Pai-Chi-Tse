@@ -140,8 +140,7 @@ void push(Stack_t *const stk, Coor_xy *src)
     stk->top = node;
     stk->num++;
 
-    printf("hi");
-    printf("\n%d\n",stk->num);
+    //printf("\n%d\n",stk->num);
 
     return;
 }
@@ -168,7 +167,7 @@ Coor_xy* pop(Stack_t *const stk, Coor_xy *des)
 
     //memcpy(des, temp->value, size);
     free(temp);
-    printf("%d %d %d",des->x, des->y, des->team);
+    //printf("%d %d %d",des->x, des->y, des->team);
 
     return des;
 }
@@ -295,7 +294,6 @@ Coor_xy* queue_remove_rear(Queue_t *const que, Coor_xy *removed)
         que->head = NULL;
         tmp = que->rear;
         que->rear = NULL;
-        printf("\nhey!");
     }else{
         tmp = que->rear;
         que->rear = tmp->previous;
@@ -306,7 +304,7 @@ Coor_xy* queue_remove_rear(Queue_t *const que, Coor_xy *removed)
     que->num--;
     free(tmp);
 
-    printf("\nhhhh%d %d %d", removed->x, removed->y, removed->team);
+    //printf("\nhhhh%d %d %d", removed->x, removed->y, removed->team);
     return removed;
 }
 

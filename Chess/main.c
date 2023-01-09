@@ -77,7 +77,6 @@ int main()
 
         do
         {
-            printf("%d\n",end);
             if(end)
             {
                 printf("%d",end,"   Game over!\n");
@@ -117,7 +116,7 @@ int main()
             }
             if(!regret)
             {
-                printf("%d %d", temp_choose[COOR_X], temp_choose[COOR_Y]);  //test xy cooredinate
+                //printf("%d %d", temp_choose[COOR_X], temp_choose[COOR_Y]);  //test xy cooredinate
 
                 if(chess[temp_choose[COOR_X]][temp_choose[COOR_Y]].chess_type == none)
                 {
@@ -164,7 +163,7 @@ int main()
                     fprintf(fp_write, "%d ", temp_place[i]);   //write to the file
                     temp_place[i] = temp_place[i] - 1;
                 }
-                printf("%d %d", temp_place[COOR_X], temp_place[COOR_Y]);  //test xy cooredinate
+                //printf("%d %d", temp_place[COOR_X], temp_place[COOR_Y]);  //test xy cooredinate
 
                 ///////////////decide whether the chosen chess can be moved///////////////
                 if(!chess_def(chess, temp_choose, temp_place, turn, save_chess, die_chess_up, die_chess_down, procedure, end))
@@ -179,7 +178,7 @@ int main()
         }
         while(redo);
 
-        printf("%d %d", temp_place[COOR_X], temp_place[COOR_Y]);
+        //printf("%d %d", temp_place[COOR_X], temp_place[COOR_Y]);
         //display_die(chess, die_chess_up, die_chess_down);
         //display(save_chess);
         ///////////////update the checkerboard/////////////////
@@ -188,21 +187,21 @@ int main()
         {
             Coor_xy *des = init_coor();
             des = queue_remove_rear(procedure,des);
-            printf("\ntttt%d %d %d", des->x, des->y, des->team);
+            //printf("\ntttt%d %d %d", des->x, des->y, des->team);
             chess[des->x][des->y].chess_type = des->chess_type;
             chess[des->x][des->y].team = des->team;
-            printf("\nremove\n");
+            //printf("\nremove\n");
             ////for died chess regretting////
             des = pop(save_chess, des);
             chess[des->x][des->y].chess_type = des->chess_type;
             chess[des->x][des->y].team = des->team;
-            printf("\npop\n");
+            //printf("\npop\n");
         }
 
-        display(procedure->head);
+        //display(procedure->head);
         turn = -turn;
         update_board(chess, die_chess_up, die_chess_down);
-        display(procedure->head);
+        //display(procedure->head);
     }
     while(TRUE);
 
@@ -466,8 +465,8 @@ int chess_def(Coor_xy **const nodes, int *choose, int *place, int turn, Stack_t 
     *dc = nodes[cx][cy];
     Coor_xy *dp = init_coor();
     *dp = nodes[px][py];
-    printf("\ndc!!!!%d %d %d",dc->x, dc->y, dc->team);
-    printf("\ndp!!!!%d %d %d",dp->x, dp->y, dp->team);
+    //printf("\ndc!!!!%d %d %d",dc->x, dc->y, dc->team);
+    //printf("\ndp!!!!%d %d %d",dp->x, dp->y, dp->team);
     //////////////////////////////////////////////////////////////////////////////
     int change = 0;
     if(nodes[px][py].chess_type!=none && nodes[px][py].team==-turn)  //kill enemy
@@ -480,9 +479,9 @@ int chess_def(Coor_xy **const nodes, int *choose, int *place, int turn, Stack_t 
             queue_insert(down, dp);
 
 
-        display(up->head);
-        printf("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ");
-        display(down->head);
+        //display(up->head);
+        //printf("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ");
+        //display(down->head);
     }
     else if(nodes[px][py].chess_type==none)  //just move
         change = TRUE;
@@ -498,16 +497,16 @@ int chess_def(Coor_xy **const nodes, int *choose, int *place, int turn, Stack_t 
         push(save_chess, dp);
         queue_insert(proc, dc);
         //
-        printf("\nccccType:%d Team:%d\n",nodes[cx][cy].chess_type, nodes[cx][cy].team);
-        printf("\nppppType:%d Team:%d\n",nodes[px][py].chess_type, nodes[px][py].team);
-        printf("\nThe number of queue is %d\n", proc->num);
-        printf("\nThe number of died chess is %d\n", save_chess->num);
+        //printf("\nccccType:%d Team:%d\n",nodes[cx][cy].chess_type, nodes[cx][cy].team);
+        //printf("\nppppType:%d Team:%d\n",nodes[px][py].chess_type, nodes[px][py].team);
+        //printf("\nThe number of queue is %d\n", proc->num);
+        //printf("\nThe number of died chess is %d\n", save_chess->num);
         nodes[px][py].chess_type = nodes[cx][cy].chess_type;
         nodes[px][py].team = nodes[cx][cy].team;
         nodes[cx][cy].chess_type = none;
         nodes[cx][cy].team = NONE;
-        printf("\nccccType:%d Team:%d\n",nodes[cx][cy].chess_type, nodes[cx][cy].team);
-        printf("\nppppType:%d Team:%d\n",nodes[px][py].chess_type, nodes[px][py].team);
+        //printf("\nccccType:%d Team:%d\n",nodes[cx][cy].chess_type, nodes[cx][cy].team);
+        //printf("\nppppType:%d Team:%d\n",nodes[px][py].chess_type, nodes[px][py].team);
         return TRUE;
     }else return FALSE;
 
