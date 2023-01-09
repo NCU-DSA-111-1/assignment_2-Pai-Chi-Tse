@@ -57,3 +57,4 @@ Select the coordinates to place:
 10 ------------------
 11
 The chess you want to move(input coordinate):
+0
