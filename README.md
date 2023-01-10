@@ -356,5 +356,6 @@ Select the coordinates to place:
 Game over!                         //the general is dead
 
 ##save the process in the fp_write
+
 ```sh
 7 5 6 5 0 7 5 6 5 3 5 4 5 6 5 5 5 4 5 5 5 8 8 8 5 3 7 4 7 8 5 5 5 2 8 4 8 5 5 1 5 0 5 5 2 8 4 8 4 7 4 6 5 5 1 5 
