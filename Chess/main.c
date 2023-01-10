@@ -13,6 +13,8 @@ Queue_t *die_chess_up;
 Queue_t *die_chess_down;
 Queue_t *procedure;
 Node_t *read;
+Coor_xy *step;
+Queue_t *save_step;
 int turn;
 int regret;
 
@@ -29,6 +31,9 @@ int main()
     die_chess_down = init_queue();
     procedure = init_queue();
     read = init_nodes();
+    ////
+    save_step = init_queue();
+    step = init_coor();
 
     turn = DOWN;  //team 2 first
     regret = FALSE;
@@ -48,6 +53,7 @@ int main()
     */
     Coor_xy **chess = init_board();
     update_board(chess, die_chess_up, die_chess_down);
+
 
     int end = 0;  //General is killed.
 
@@ -79,15 +85,19 @@ int main()
         {
             if(end)
             {
-                printf("%d",end,"   Game over!\n");
+                printf("Game over!\n");
                 break;
             }
+            printf("%d\n", end);
             printf("The chess you want to move(input coordinate):\n");
 
             for(int i=0; i<COORDINATE_NUM; i++)
             {
                 scanf("%d", &temp_choose[i]);
+                step->x = temp_choose[i];
+                queue_insert(save_step, step);
                 fprintf(fp_write, "%d ", temp_choose[i]);   //write to the file
+
                 //first time regretting
                 if(temp_choose[i] == 11)
                 {
@@ -133,13 +143,12 @@ int main()
             else break;
 
 
-        }
-        while(redo && !end);
+        }while(redo && !end);
         if(end)
         {
-            printf("Game over!\n");
             break;
         }
+
         /*
         //test initial coordinate values
         printf("\nInitial coordinate values:\n");
@@ -160,13 +169,15 @@ int main()
                 for(int i=0; i<COORDINATE_NUM; i++)
                 {
                     scanf("%d", &temp_place[i]);
+                    step->x = temp_place[i];
+                    queue_insert(save_step, step);
                     fprintf(fp_write, "%d ", temp_place[i]);   //write to the file
                     temp_place[i] = temp_place[i] - 1;
                 }
                 //printf("%d %d", temp_place[COOR_X], temp_place[COOR_Y]);  //test xy cooredinate
 
                 ///////////////decide whether the chosen chess can be moved///////////////
-                if(!chess_def(chess, temp_choose, temp_place, turn, save_chess, die_chess_up, die_chess_down, procedure, end))
+                if(!chess_def(chess, temp_choose, temp_place, turn, save_chess, die_chess_up, die_chess_down, procedure, &end))
                 {
                     printf("\nYou can't place the chess here! Please reposition it.\n");
                     redo = TRUE;
@@ -175,9 +186,10 @@ int main()
             }
             else break;
 
+
         }
         while(redo);
-
+        printf("here%d\n", end);
         //printf("%d %d", temp_place[COOR_X], temp_place[COOR_Y]);
         //display_die(chess, die_chess_up, die_chess_down);
         //display(save_chess);
@@ -255,28 +267,16 @@ void update_board(Coor_xy **const nodes, Queue_t *const up, Queue_t *const down)
     return;
 }
 
-int chess_def(Coor_xy **const nodes, int *choose, int *place, int turn, Stack_t *const save_chess, Queue_t *const up, Queue_t *const down, Queue_t *const proc, int end)
+int chess_def(Coor_xy **const nodes, int *choose, int *place, int turn, Stack_t *const save_chess, Queue_t *const up, Queue_t *const down, Queue_t *const proc, int* end)
 {
     //get the value
     Shogi_chess type = nodes[choose[COOR_X]][choose[COOR_Y]].chess_type;
-    Shogi_chess type_p = nodes[place[COOR_X]][place[COOR_Y]].chess_type;
+
     int cx = choose[COOR_X];
     int cy = choose[COOR_Y];
     int px = place[COOR_X];
     int py = place[COOR_Y];
-    switch(type_p)
-    {
-        case general:
-            {
-                end = TRUE;
-                break;
-            }
-        default:
-            {
-                end = FALSE;
-                break;
-            }
-    }
+
     //decide which type
     switch(type)
     {
@@ -491,8 +491,9 @@ int chess_def(Coor_xy **const nodes, int *choose, int *place, int turn, Stack_t 
     if(change)
     {
         //judge if the game is over when the general is killed
-        if(dp->chess_type==general) end = TRUE;
-        else end = FALSE;
+        if(dp->chess_type==general) (*end) = TRUE;
+
+        printf("change%d\n", (*end));
         //stack and queue
         push(save_chess, dp);
         queue_insert(proc, dc);

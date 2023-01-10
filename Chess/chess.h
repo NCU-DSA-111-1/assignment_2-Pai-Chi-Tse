@@ -85,7 +85,7 @@ void update_board(Coor_xy **const, Queue_t *const, Queue_t *const);
 void display_die(Coor_xy **const, Stack_t *const, Stack_t *const);
 void display(Node_t *);
 void chess_printing(Shogi_chess, int);
-int chess_def(Coor_xy **const, int*, int*, int, Stack_t *const, Queue_t *const, Queue_t *const,  Queue_t *const, int);
+int chess_def(Coor_xy **const, int*, int*, int, Stack_t *const, Queue_t *const, Queue_t *const,  Queue_t *const, int*);
 
 //queue
 Coor_xy* queue_remove_head(Queue_t *const, Coor_xy*);
