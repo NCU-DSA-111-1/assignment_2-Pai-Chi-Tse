@@ -88,14 +88,14 @@ int main()
                 printf("Game over!\n");
                 break;
             }
-            printf("%d\n", end);
+            //printf("%d\n", end);
             printf("The chess you want to move(input coordinate):\n");
 
             for(int i=0; i<COORDINATE_NUM; i++)
             {
                 scanf("%d", &temp_choose[i]);
-                step->x = temp_choose[i];
-                queue_insert(save_step, step);
+                //step->x = temp_choose[i];
+                //queue_insert(save_step, step);
                 fprintf(fp_write, "%d ", temp_choose[i]);   //write to the file
 
                 //first time regretting
@@ -169,8 +169,8 @@ int main()
                 for(int i=0; i<COORDINATE_NUM; i++)
                 {
                     scanf("%d", &temp_place[i]);
-                    step->x = temp_place[i];
-                    queue_insert(save_step, step);
+                    //step->x = temp_place[i];
+                    //queue_insert(save_step, step);
                     fprintf(fp_write, "%d ", temp_place[i]);   //write to the file
                     temp_place[i] = temp_place[i] - 1;
                 }
@@ -189,7 +189,6 @@ int main()
 
         }
         while(redo);
-        printf("here%d\n", end);
         //printf("%d %d", temp_place[COOR_X], temp_place[COOR_Y]);
         //display_die(chess, die_chess_up, die_chess_down);
         //display(save_chess);
@@ -493,7 +492,6 @@ int chess_def(Coor_xy **const nodes, int *choose, int *place, int turn, Stack_t 
         //judge if the game is over when the general is killed
         if(dp->chess_type==general) (*end) = TRUE;
 
-        printf("change%d\n", (*end));
         //stack and queue
         push(save_chess, dp);
         queue_insert(proc, dc);
