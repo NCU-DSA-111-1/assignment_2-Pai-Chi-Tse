@@ -267,6 +267,11 @@ Select the coordinates to place:
 10 ------------------
 11 兵
 The chess you want to move(input coordinate):
+1
+5
+
+That's not your chess! Please reselect one.          //detect error
+The chess you want to move(input coordinate):
 0
 
 Regret......                                       //regret
@@ -349,3 +354,7 @@ Select the coordinates to place:
 10 ------------------
 11 兵將
 Game over!                         //the general is dead
+
+##save the process in the fp_write
+```sh
+7 5 6 5 0 7 5 6 5 3 5 4 5 6 5 5 5 4 5 5 5 8 8 8 5 3 7 4 7 8 5 5 5 2 8 4 8 5 5 1 5 0 5 5 2 8 4 8 4 7 4 6 5 5 1 5 
